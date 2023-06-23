@@ -1,0 +1,137 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_INSTRUMENTS 100
+
+//Musical Instrument Management System
+//Name:Eram Hossain 
+//ID:2311854042
+//Sec:4
+
+struct Instrument {
+    char name[50];
+    char type[50];
+    float price;
+};
+
+struct Instrument instruments[MAX_INSTRUMENTS];
+int numInstruments = 0;
+
+void addInstrument() {
+    if (numInstruments >= MAX_INSTRUMENTS) {
+        printf("Maximum limit reached. Cannot add more instruments.\n");
+        return;
+    }
+
+    struct Instrument newInstrument;
+    printf("Enter the instrument name: ");
+    scanf("%s", newInstrument.name);
+    printf("Enter the instrument type: ");
+    scanf("%s", newInstrument.type);
+    printf("Enter the instrument price: ");
+    scanf("%f", &newInstrument.price);
+
+    instruments[numInstruments++] = newInstrument;
+
+    printf("Instrument added successfully.\n");
+}
+
+void deleteInstrument() {
+    int i;
+    char name[50];
+    printf("Enter the name of the instrument to delete: ");
+    scanf("%s", name);
+
+    for (i = 0; i < numInstruments; i++) {
+        if (strcmp(instruments[i].name, name) == 0) {
+            int j;
+            for (j = i; j < numInstruments - 1; j++) {
+                instruments[j] = instruments[j + 1];
+            }
+            numInstruments--;
+            printf("Instrument deleted successfully.\n");
+            return;
+        }
+    }
+
+    printf("Instrument not found.\n");
+}
+
+void editInstrument() {
+    int i;
+    char name[50];
+    printf("Enter the name of the instrument to edit: ");
+    scanf("%s", name);
+
+    for (i = 0; i < numInstruments; i++) {
+        if (strcmp(instruments[i].name, name) == 0) {
+            printf("Enter the new instrument name: ");
+            scanf("%s", instruments[i].name);
+            printf("Enter the new instrument type: ");
+            scanf("%s", instruments[i].type);
+            printf("Enter the new instrument price: ");
+            scanf("%f", &instruments[i].price);
+
+            printf("Instrument edited successfully.\n");
+            return;
+        }
+    }
+
+    printf("Instrument not found.\n");
+}
+
+void displayInstruments() {
+    int i;
+    printf("Instrument List:\n");
+
+    if (numInstruments == 0) {
+        printf("No instruments found.\n");
+        return;
+    }
+
+    for (i = 0; i < numInstruments; i++) {
+        printf("Name: %s\n", instruments[i].name);
+        printf("Type: %s\n", instruments[i].type);
+        printf("Price: %.2f\n", instruments[i].price);
+        printf("--------------------\n");
+    }
+}
+
+int main() {
+    int choice;
+
+    do {
+        printf("\nMusical Instrument Management System\n");
+        printf("1. Add Instrument\n");
+        printf("2. Delete Instrument\n");
+        printf("3. Edit Instrument\n");
+        printf("4. Display Instruments\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                addInstrument();
+                break;
+            case 2:
+                deleteInstrument();
+                break;
+            case 3:
+                editInstrument();
+                break;
+            case 4:
+                displayInstruments();
+                break;
+            case 5:
+                printf("Exiting the program. Goodbye!\n");
+                exit(0);
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    } while (1);
+
+    return 0;
+}
+
