@@ -5,9 +5,11 @@
 #define MAX_INSTRUMENTS 100
 
 //Musical Instrument Management System
-//Name:Eram Hossain 
+//Name:Eram Hossain
 //ID:2311854042
 //Sec:4
+
+//Start the program
 
 struct Instrument {
     char name[50];
@@ -18,6 +20,8 @@ struct Instrument {
 struct Instrument instruments[MAX_INSTRUMENTS];
 int numInstruments = 0;
 
+//Enter the different commands
+
 void addInstrument() {
     if (numInstruments >= MAX_INSTRUMENTS) {
         printf("Maximum limit reached. Cannot add more instruments.\n");
@@ -27,8 +31,10 @@ void addInstrument() {
     struct Instrument newInstrument;
     printf("Enter the instrument name: ");
     scanf("%s", newInstrument.name);
+    //Instrument types include String,Percussion,Brass,Woodwind,Keyboard
     printf("Enter the instrument type: ");
     scanf("%s", newInstrument.type);
+    //Currency is BDT
     printf("Enter the instrument price: ");
     scanf("%f", &newInstrument.price);
 
@@ -134,4 +140,6 @@ int main() {
 
     return 0;
 }
+//End the program
+
 
